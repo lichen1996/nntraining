@@ -48,7 +48,8 @@ class frame_net(nn.Module):
 
     #training
     # def training(self,epochs_num):
-        epochs_num=1000
+        epochs_num=100
+        losslist=[]
         for epoch in range(epochs_num):
             for trainNO in range(self.data_num):
                 frameside=self.X[trainNO]
@@ -63,10 +64,13 @@ class frame_net(nn.Module):
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
-            if (epoch + 1) % 20 == 0:
+                # losslist[epochs_num]=loss.data[0]
+            if (epoch + 1) % 2 == 0:
                print('Epoch[{}/{}], loss: {:.6f}'
                      .format(epoch + 1, epochs_num, loss.data[0]))
         torch.save(self.net, 'net.pkl')  # save net
+
+
 
 
 
